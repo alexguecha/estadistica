@@ -2,7 +2,9 @@
 title: 'Taller #1 - Estadistica para la analítica de datos'
 author: "Sergio Castañeda, Guillermo Castillo, Alexander Guecha"
 date: "19/3/2022"
-output: pdf_document
+output:
+  word_document: default
+  pdf_document: default
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -13,7 +15,7 @@ En la librería car podrá encontrar una base de datos llamada Chile, la cual pr
 
 ```{r}
 library(readxl)
-Chile <- read_excel("~/maestria analitica de datos/Estadistica/1. ChileTaller.xlsx", 
+Chile <- read_excel("~/GitHub/estadistica/1. ChileTaller.xlsx", 
     col_types = c("numeric", "text", "numeric", 
         "text", "numeric", "text", "numeric", 
         "numeric", "text"))
@@ -127,7 +129,7 @@ En cada uno de los casos, proporcione los análisis, conclusiones y recomendacio
 
 ```{r}
 library(readxl)
-Nutrition <- read_excel("~/maestria analitica de datos/Estadistica/2. nutrition_elderly.xlsx", 
+Nutrition <- read_excel("~/GitHub/estadistica/2. nutrition_elderly.xlsx", 
     col_types = c("text", "text", "numeric", 
         "numeric", "numeric", "numeric", 
         "numeric", "text", "text", "text", 

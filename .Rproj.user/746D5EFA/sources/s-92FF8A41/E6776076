@@ -3,7 +3,7 @@
     "path": "~/GitHub/estadistica/Taller_1_v2.Rmd",
     "project_path": "Taller_1_v2.Rmd",
     "type": "r_markdown",
-    "hash": "760082546",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1647721680564.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "10,327",
-        "scrollLine": "0"
+        "cursorPosition": "131,46",
+        "scrollLine": "138"
     },
     "folds": "",
-    "lastKnownWriteTime": 1647722141,
+    "lastKnownWriteTime": 1647728931,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1647722141339,
+    "last_content_update": 1647728931,
     "read_only": false,
     "read_only_alternatives": []
 }
