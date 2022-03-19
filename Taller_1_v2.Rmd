@@ -8,7 +8,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-En la librería car podrá encontrar una base de datos llamada Chile, la cual proporciona parcialmente, información demográfica de Chile. La base de datos tiene 2700 filas y 8 columnas.Los datos provienen de una encuesta nacional de hogares llevada a cabo en abril y mayo de 1988 por FLACSO / Chile. Hay algunos datos que faltan.
+En la librería car podrá encontrar una base de datos llamada Chile, la cual proporciona parcialmente, información demográfica de Chile. La base de datos tiene 2700 filas y 8 columnas.Los datos provienen de una encuesta nacional de hogares llevada a cabo en abril y mayo de 1988 por FLACSO / Chile. Hay algunos datos que faltan .
 
 
 ```{r}
