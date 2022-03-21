@@ -1,26 +1,26 @@
 {
     "id": "E6776076",
-    "path": "~/GitHub/estadistica/Taller_1_v2.Rmd",
-    "project_path": "Taller_1_v2.Rmd",
+    "path": "~/GitHub/estadistica/Taller_1_vfinal.Rmd",
+    "project_path": "Taller_1_vfinal.Rmd",
     "type": "r_markdown",
     "hash": "0",
     "contents": "",
-    "dirty": false,
+    "dirty": true,
     "created": 1647721680564.0,
     "source_on_save": false,
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "131,46",
-        "scrollLine": "138"
+        "cursorPosition": "95,87",
+        "scrollLine": "84"
     },
     "folds": "",
-    "lastKnownWriteTime": 1647728931,
+    "lastKnownWriteTime": 1647826730,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1647728931,
+    "last_content_update": 1647827132741,
     "read_only": false,
     "read_only_alternatives": []
 }

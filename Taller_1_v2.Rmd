@@ -19,10 +19,12 @@ Chile <- read_excel("~/GitHub/estadistica/1. ChileTaller.xlsx",
     col_types = c("numeric", "text", "numeric", 
         "text", "numeric", "text", "numeric", 
         "numeric", "text"))
-View(Chile)
+#View(Chile)
 ```
 
 # a) Proporcione un resumen descriptivo univariado de esta información y b) Desarrolle gráficos pertinentes según el tipo de variable.
+
+##Variable Región
 
 ```{r}
 Region_= Chile$region
@@ -36,11 +38,11 @@ Rtabla4= cbind(Rtabla3, cum_porcentaje)
 Rtabla4
 
 
-BPregion <- barplot(prop.table(table(Chile$region)),col=c("orange","blue","green","red","purple"),legend.text=c("Center","Metropolitan","North","South","City of Santiago"),ylim=c(0,0.8),xlim=c(0,11),main="Frecuencias relativas de participaciÃ³n por regiÃ³n",ylab ="Frecuencias Relativas")
+BPregion <- barplot(prop.table(table(Chile$region)),col=c("orange","blue","green","red","purple"),legend.text=c("Center","Metropolitan","North","South","City of Santiago"),ylim=c(0,0.8),xlim=c(0,11),main="Frecuencias relativas de participación por región",ylab ="Frecuencias Relativas")
 
 ```
 
-**Para el caso de la variable Region se puede identificar que las region de City of Santiago (n= 960) es la que tuvo mayor participación en las votaciones, seguida por la región sur (n=718) y la región center (n=600)**
+**Para el caso de la variable *Region* que es cualitativa nominal, se destaca que la región de *City of Santiago (n= 960)* es la que tuvo mayor participación en las votaciones, seguida por las regiones *Sur (n=718)* y *Center (n=600)***
 
 ```{r}
 Sexo_= Chile$sex
@@ -53,10 +55,10 @@ cum_porcentaje=cumsum(Stabla3[,3])
 Stabla4= cbind(Stabla3, cum_porcentaje)
 Stabla4
 
-BPsex <- barplot(prop.table(table(Chile$sex)),col=c("orange","blue"),legend.text=c("Femenino","Masculino"),ylim=c(0,0.8),xlim=c(0,3),main="Frecuencias relativas de participaciÃ³n en votaciones por sexo",ylab ="Frecuencias Relativas")
+BPsex <- barplot(prop.table(table(Chile$sex)),col=c("orange","blue"),legend.text=c("Femenino","Masculino"),ylim=c(0,0.8),xlim=c(0,3),main="Frecuencias relativas de participación en votaciones por sexo",ylab ="Frecuencias Relativas")
 ```
 
-**Para el caso de la variable cualitativa sexo pudemos observar que la proporsión de votantes hombres y mujeres es muy similar con una leve proporsión mayor en participación de mujeres**
+**En relación con la variable *Sexo* que es cualitativa nominal, pudimos observar que la proporción de votantes hombres y mujeres es muy similar, con una leve diferencia de mayor participación por parte de las mujeres**
 
 
 ```{r}
@@ -70,11 +72,11 @@ cum_porcentaje=cumsum(Etabla3[,3])
 Etabla4= cbind(Etabla3, cum_porcentaje)
 Etabla4
 
-BPEdu <- barplot(prop.table(table(Chile$education)),col=c("orange","blue","green","purple"),legend.text=c("Not answered","Primary","Post Secundary","Secondary"),ylim=c(0,0.8),xlim=c(0,6),main="Frecuencias relativas de participaciÃ³n en votaciones por nivel educativo",ylab ="Frecuencias Relativas")
+BPEdu <- barplot(prop.table(table(Chile$education)),col=c("orange","blue","green","purple"),legend.text=c("Not answered","Primary","Post Secundary","Secondary"),ylim=c(0,0.8),xlim=c(0,6),main="Frecuencias relativas de participación en votaciones por nivel educativo",ylab ="Frecuencias Relativas")
 
 ```
 
-**para el caso de la variable educación se puede identificar que la proporsion de votantes es mayor en personas con un nivel educativo de "primaria" y "secundaria", por su parte "post secundaria" cuanta con una muy baja participación en las elecciones de chile**
+**Frente a la  variable *educación* que es cualitativa ordinal, se puede identificar que la proporción de votantes es mayor en personas con un nivel educativo de *"primaria" y "secundaria"*, por su parte *"post secundaria"* cuenta con una muy baja participación en las elecciones de Chile**
 
 ```{r}
 Vote_= Chile$vote
@@ -90,7 +92,7 @@ Vtabla4
 BPvote <- barplot(prop.table(table(Chile$vote)),col=c("orange","blue","green","red","purple"),legend.text=c("will abstain","will vote no","not answered","undecided","will vote yes"),ylim=c(0,0.8),xlim=c(0,7),main="Frecuencias relativas de participación en votaciones intensión de voto por Pinochet",ylab ="Frecuencias Relativas")
 ```
 
-**Respecto a la variable relacionada con la intensiÃ³n de voto por el presidente "pinochet" se encuentra que las personas que votarÃ¡n SI (33%) son muy cercanas a las personas que votarÃ¡n NO (32%)**
+**Respecto a la variable *Statusquo* que es cuantitativa y está relacionada con la intención de voto por el presidente "Pinochet", se encuentra que las personas que votaron en SI (33%) son muy cercanas a las personas que votaron en NO (32%)**
 
 ======================================================================
 
@@ -108,9 +110,10 @@ CrossTable(Chile_NteySur$education,Chile_NteySur$vote)
 ```
 
 **Conclusiones**
-De acuerdo a la anterior tabla de contingencia encontramos que el mayor valor chi cuadrado se encuentra entre un nivel de estudio de primaria (P) y la intensión de votar NO por pinochet como presidente. Por otro lado se evidencia que dicha relacion entre la intensión de votar NO por pinochet como presidente es alta en personas con un nivel educativo de PostSecundaria (PS).
 
-En otro de los cruces de variable en donde encontramos un chi cuadrado superior es en la intensión de voto de respaldar a Pinochet con el SI en personas con un nivel educativo de primaria (P) 
+De acuerdo con el resultado de la anterior tabla de contingencia, encontramos que el mayor valor ***Chi Cuadrado*** se ubica entre un nivel de estudio de primaria (P) y la intención de votar en **NO** por Pinochet como presidente. De otra parte, se evidencia que dicha relación entre la intención de votar en **NO** por Pinochet como presidente es alta en personas con un nivel educativo de PostSecundaria (PS).
+
+En otro de los cruces de variable en donde encontramos un ***Chi Cuadrado*** superior es en la intención de voto de respaldar a Pinochet con el SI en personas con un nivel educativo de primaria (P) 
 
 
 

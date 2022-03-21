@@ -1,0 +1,967 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\title{Taller \#1 - Estadistica para la analítica de datos}
+\author{Sergio Castañeda, Guillermo Castillo, Alexander Guecha}
+\date{19/3/2022}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Taller \#1 - Estadistica para la analítica de datos},
+  pdfauthor={Sergio Castañeda, Guillermo Castillo, Alexander Guecha},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\NormalTok{opts\_chunk}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{echo =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{actividad-1}{%
+\section{Actividad \# 1}\label{actividad-1}}
+
+En la librería car podrá encontrar una base de datos llamada Chile, la
+cual proporciona parcialmente, información demográfica de Chile. La base
+de datos tiene 2700 filas y 8 columnas.Los datos provienen de una
+encuesta nacional de hogares llevada a cabo en abril y mayo de 1988 por
+FLACSO / Chile. Hay algunos datos que faltan .
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readxl)}
+\NormalTok{Chile }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"\textasciitilde{}/GitHub/estadistica/1. ChileTaller.xlsx"}\NormalTok{, }
+    \AttributeTok{col\_types =} \FunctionTok{c}\NormalTok{(}\StringTok{"numeric"}\NormalTok{, }\StringTok{"text"}\NormalTok{, }\StringTok{"numeric"}\NormalTok{, }
+        \StringTok{"text"}\NormalTok{, }\StringTok{"numeric"}\NormalTok{, }\StringTok{"text"}\NormalTok{, }\StringTok{"numeric"}\NormalTok{, }
+        \StringTok{"numeric"}\NormalTok{, }\StringTok{"text"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{a-proporcione-un-resumen-descriptivo-univariado-de-esta-informaciuxf3n-y-b-desarrolle-gruxe1ficos-pertinentes-seguxfan-el-tipo-de-variable.}{%
+\section{a) Proporcione un resumen descriptivo univariado de esta
+información y b) Desarrolle gráficos pertinentes según el tipo de
+variable.}\label{a-proporcione-un-resumen-descriptivo-univariado-de-esta-informaciuxf3n-y-b-desarrolle-gruxe1ficos-pertinentes-seguxfan-el-tipo-de-variable.}}
+
+\hypertarget{variable-region}{%
+\subsection{\texorpdfstring{Variable
+\textbf{Region}}{Variable Region}}\label{variable-region}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Region\_}\OtherTok{=}\NormalTok{ Chile}\SpecialCharTok{$}\NormalTok{region}
+\NormalTok{Rtabla}\OtherTok{=}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{table}\NormalTok{(Region\_))}
+\NormalTok{porcentaje}\OtherTok{=}\FunctionTok{prop.table}\NormalTok{(Rtabla[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{Rtabla2}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Rtabla, porcentaje)}
+\NormalTok{cum\_frequencia}\OtherTok{=}\FunctionTok{cumsum}\NormalTok{(Rtabla2[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{Rtabla3}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Rtabla2, cum\_frequencia)}
+\NormalTok{cum\_porcentaje}\OtherTok{=}\FunctionTok{cumsum}\NormalTok{(Rtabla3[,}\DecValTok{3}\NormalTok{])}
+\NormalTok{Rtabla4}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Rtabla3, cum\_porcentaje)}
+\NormalTok{Rtabla4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Region_ Freq porcentaje cum_frequencia cum_porcentaje
+## 1       C  600 0.22222222            600      0.2222222
+## 2       M  100 0.03703704            700      0.2592593
+## 3       N  322 0.11925926           1022      0.3785185
+## 4       S  718 0.26592593           1740      0.6444444
+## 5      SA  960 0.35555556           2700      1.0000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BPregion }\OtherTok{\textless{}{-}} \FunctionTok{barplot}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{region)),}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"orange"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"purple"}\NormalTok{),}\AttributeTok{legend.text=}\FunctionTok{c}\NormalTok{(}\StringTok{"Center"}\NormalTok{,}\StringTok{"Metropolitan"}\NormalTok{,}\StringTok{"North"}\NormalTok{,}\StringTok{"South"}\NormalTok{,}\StringTok{"City of Santiago"}\NormalTok{),}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.8}\NormalTok{),}\AttributeTok{xlim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{11}\NormalTok{),}\AttributeTok{main=}\StringTok{"Frecuencias relativas de participación por región"}\NormalTok{,}\AttributeTok{ylab =}\StringTok{"Frecuencias Relativas"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+Para el caso de la variable \emph{Region} que es cualitativa nominal, se
+destaca que la región de \textbf{\emph{City of Santiago (n= 960)}} es la
+que tuvo mayor participación en las votaciones, seguida por las regiones
+\textbf{\emph{Sur (n=718)} y \emph{Center (n=600)}}
+
+\hypertarget{variable-population}{%
+\subsection{\texorpdfstring{Variable
+\textbf{Population}}{Variable Population}}\label{variable-population}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(fBasics)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: timeDate
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: timeSeries
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{basicStats}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{population)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             X..Chile.population
+## nobs               2.700000e+03
+## NAs                0.000000e+00
+## Minimum            3.750000e+03
+## Maximum            2.500000e+05
+## 1. Quartile        2.500000e+04
+## 3. Quartile        2.500000e+05
+## Mean               1.522222e+05
+## Median             1.750000e+05
+## Sum                4.110000e+08
+## SE Mean            1.966802e+03
+## LCL Mean           1.483656e+05
+## UCL Mean           1.560788e+05
+## Variance           1.044444e+10
+## Stdev              1.021980e+05
+## Skewness          -2.687220e-01
+## Kurtosis          -1.719115e+00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#hist(Chile$population)}
+\FunctionTok{library}\NormalTok{(agricolae)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'agricolae'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:timeDate':
+## 
+##     kurtosis, skewness
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{),}\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{),}\AttributeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{h1}\OtherTok{\textless{}{-}}\FunctionTok{graph.freq}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{population, }\AttributeTok{density=}\DecValTok{6}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{border=}\StringTok{"red"}\NormalTok{,}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.6}\NormalTok{), }\AttributeTok{frequency=}\DecValTok{2}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"population"}\NormalTok{)}
+\NormalTok{h2}\OtherTok{\textless{}{-}}\FunctionTok{graph.freq}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{population, }\AttributeTok{border=}\DecValTok{0}\NormalTok{,}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.6}\NormalTok{), }\AttributeTok{frequency=}\DecValTok{2}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"population"}\NormalTok{)}
+\FunctionTok{polygon.freq}\NormalTok{(h2,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\hypertarget{variable-sex}{%
+\subsection{\texorpdfstring{Variable
+\textbf{Sex}}{Variable Sex}}\label{variable-sex}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Sexo\_}\OtherTok{=}\NormalTok{ Chile}\SpecialCharTok{$}\NormalTok{sex}
+\NormalTok{Stabla}\OtherTok{=}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{table}\NormalTok{(Sexo\_))}
+\NormalTok{porcentaje}\OtherTok{=}\FunctionTok{prop.table}\NormalTok{(Stabla[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{Stabla2}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Stabla, porcentaje)}
+\NormalTok{cum\_frequencia}\OtherTok{=}\FunctionTok{cumsum}\NormalTok{(Stabla2[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{Stabla3}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Stabla2, cum\_frequencia)}
+\NormalTok{cum\_porcentaje}\OtherTok{=}\FunctionTok{cumsum}\NormalTok{(Stabla3[,}\DecValTok{3}\NormalTok{])}
+\NormalTok{Stabla4}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Stabla3, cum\_porcentaje)}
+\NormalTok{Stabla4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Sexo_ Freq porcentaje cum_frequencia cum_porcentaje
+## 1     F 1379  0.5107407           1379      0.5107407
+## 2     M 1321  0.4892593           2700      1.0000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BPsex }\OtherTok{\textless{}{-}} \FunctionTok{barplot}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{sex)),}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"orange"}\NormalTok{,}\StringTok{"blue"}\NormalTok{),}\AttributeTok{legend.text=}\FunctionTok{c}\NormalTok{(}\StringTok{"Femenino"}\NormalTok{,}\StringTok{"Masculino"}\NormalTok{),}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.8}\NormalTok{),}\AttributeTok{xlim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{),}\AttributeTok{main=}\StringTok{"Frecuencias relativas de participación en votaciones por sexo"}\NormalTok{,}\AttributeTok{ylab =}\StringTok{"Frecuencias Relativas"}\NormalTok{,}\AttributeTok{names.arg =} \FunctionTok{c}\NormalTok{(}\StringTok{"Femenino"}\NormalTok{,}\StringTok{"Masculino"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+En relación con la variable \textbf{\emph{Sexo}} que es cualitativa
+nominal, pudimos observar que la proporción de votantes hombres y
+mujeres es muy similar, con una leve diferencia de mayor participación
+por parte de las mujeres.
+
+\hypertarget{variable-age}{%
+\subsection{\texorpdfstring{Variable
+\textbf{Age}}{Variable Age}}\label{variable-age}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{basicStats}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              X..Chile.age
+## nobs          2700.000000
+## NAs              1.000000
+## Minimum         18.000000
+## Maximum         70.000000
+## 1. Quartile     26.000000
+## 3. Quartile     49.000000
+## Mean            38.548722
+## Median          36.000000
+## Sum         104043.000000
+## SE Mean          0.284040
+## LCL Mean        37.991764
+## UCL Mean        39.105680
+## Variance       217.751795
+## Stdev           14.756415
+## Skewness         0.472448
+## Kurtosis        -0.862391
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#hist(Chile$age)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{),}\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{),}\AttributeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{h1}\OtherTok{\textless{}{-}}\FunctionTok{graph.freq}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{age, }\AttributeTok{density=}\DecValTok{6}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{border=}\StringTok{"red"}\NormalTok{,}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{500}\NormalTok{), }\AttributeTok{frequency=}\DecValTok{1}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"Age"}\NormalTok{)}
+\NormalTok{h2}\OtherTok{\textless{}{-}}\FunctionTok{graph.freq}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{age, }\AttributeTok{border=}\DecValTok{0}\NormalTok{,}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{500}\NormalTok{), }\AttributeTok{frequency=}\DecValTok{1}\NormalTok{)}
+\FunctionTok{polygon.freq}\NormalTok{(h2,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\hypertarget{variable-education}{%
+\subsection{\texorpdfstring{Variable
+\textbf{Education}}{Variable Education}}\label{variable-education}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Educacion\_}\OtherTok{=}\NormalTok{ Chile}\SpecialCharTok{$}\NormalTok{education}
+\NormalTok{Etabla}\OtherTok{=}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{table}\NormalTok{(Educacion\_))}
+\NormalTok{porcentaje}\OtherTok{=}\FunctionTok{prop.table}\NormalTok{(Etabla[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{Etabla2}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Etabla, porcentaje)}
+\NormalTok{cum\_frequencia}\OtherTok{=}\FunctionTok{cumsum}\NormalTok{(Etabla2[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{Etabla3}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Etabla2, cum\_frequencia)}
+\NormalTok{cum\_porcentaje}\OtherTok{=}\FunctionTok{cumsum}\NormalTok{(Etabla3[,}\DecValTok{3}\NormalTok{])}
+\NormalTok{Etabla4}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Etabla3, cum\_porcentaje)}
+\NormalTok{Etabla4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Educacion_ Freq  porcentaje cum_frequencia cum_porcentaje
+## 1         NA   11 0.004074074             11    0.004074074
+## 2          P 1107 0.410000000           1118    0.414074074
+## 3         PS  462 0.171111111           1580    0.585185185
+## 4          S 1120 0.414814815           2700    1.000000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BPEdu }\OtherTok{\textless{}{-}} \FunctionTok{barplot}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{education)),}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"orange"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"purple"}\NormalTok{),}\AttributeTok{legend.text=}\FunctionTok{c}\NormalTok{(}\StringTok{"Not answered"}\NormalTok{,}\StringTok{"Primary"}\NormalTok{,}\StringTok{"Post Secundary"}\NormalTok{,}\StringTok{"Secondary"}\NormalTok{),}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.8}\NormalTok{),}\AttributeTok{xlim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{6}\NormalTok{),}\AttributeTok{main=}\StringTok{"Frecuencias relativas de participación en votaciones por nivel educativo"}\NormalTok{,}\AttributeTok{ylab =}\StringTok{"Frecuencias Relativas"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+Frente a la variable \textbf{\emph{educación}} que es cualitativa
+ordinal, se puede identificar que la proporción de votantes es mayor en
+personas con un nivel educativo de \emph{``primaria'' y ``secundaria''},
+por su parte \emph{``post secundaria''} cuenta con una muy baja
+participación en las elecciones de Chile.
+
+\hypertarget{variable-income}{%
+\subsection{\texorpdfstring{Variable
+\textbf{Income}}{Variable Income}}\label{variable-income}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{basicStats}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{income)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             X..Chile.income
+## nobs           2.700000e+03
+## NAs            9.800000e+01
+## Minimum        2.500000e+03
+## Maximum        2.000000e+05
+## 1. Quartile    7.500000e+03
+## 3. Quartile    3.500000e+04
+## Mean           3.387586e+04
+## Median         1.500000e+04
+## Sum            8.814500e+07
+## SE Mean        7.744172e+02
+## LCL Mean       3.235733e+04
+## UCL Mean       3.539440e+04
+## Variance       1.560477e+09
+## Stdev          3.950287e+04
+## Skewness       2.584549e+00
+## Kurtosis       7.291944e+00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#hist(Chile$income)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{),}\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{),}\AttributeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{h1}\OtherTok{\textless{}{-}}\FunctionTok{graph.freq}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{income, }\AttributeTok{density=}\DecValTok{6}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{border=}\StringTok{"red"}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{2}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"Income"}\NormalTok{)}
+\NormalTok{h2}\OtherTok{\textless{}{-}}\FunctionTok{graph.freq}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{income, }\AttributeTok{border=}\DecValTok{0}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{2}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"Income"}\NormalTok{)}
+\FunctionTok{polygon.freq}\NormalTok{(h2,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\hypertarget{variable-statusquo}{%
+\subsection{\texorpdfstring{Variable
+\textbf{Statusquo}}{Variable Statusquo}}\label{variable-statusquo}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(fBasics)}
+\FunctionTok{basicStats}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{statusquo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             X..Chile.statusquo
+## nobs               2700.000000
+## NAs                  17.000000
+## Minimum              -1.803010
+## Maximum               2.048590
+## 1. Quartile          -1.002235
+## 3. Quartile           0.968575
+## Mean                  0.000000
+## Median               -0.045580
+## Sum                  -0.000030
+## SE Mean               0.019309
+## LCL Mean             -0.037863
+## UCL Mean              0.037863
+## Variance              1.000373
+## Stdev                 1.000186
+## Skewness              0.161683
+## Kurtosis             -1.454072
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#hist(Chile$statusquo)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{),}\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{),}\AttributeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{h1}\OtherTok{\textless{}{-}}\FunctionTok{graph.freq}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{statusquo, }\AttributeTok{density=}\DecValTok{6}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{border=}\StringTok{"red"}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{2}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"Statusquo"}\NormalTok{)}
+\NormalTok{h2}\OtherTok{\textless{}{-}}\FunctionTok{graph.freq}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{statusquo, }\AttributeTok{border=}\DecValTok{0}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{2}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"Statusquo"}\NormalTok{)}
+\FunctionTok{polygon.freq}\NormalTok{(h2,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\hypertarget{variable-vote}{%
+\subsection{\texorpdfstring{Variable
+\textbf{Vote}}{Variable Vote}}\label{variable-vote}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Vote\_}\OtherTok{=}\NormalTok{ Chile}\SpecialCharTok{$}\NormalTok{vote}
+\NormalTok{Vtabla}\OtherTok{=}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{table}\NormalTok{(Vote\_))}
+\NormalTok{porcentaje}\OtherTok{=}\FunctionTok{prop.table}\NormalTok{(Vtabla[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{Vtabla2}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Vtabla, porcentaje)}
+\NormalTok{cum\_frequencia}\OtherTok{=}\FunctionTok{cumsum}\NormalTok{(Vtabla2[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{Vtabla3}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Vtabla2, cum\_frequencia)}
+\NormalTok{cum\_porcentaje}\OtherTok{=}\FunctionTok{cumsum}\NormalTok{(Vtabla3[,}\DecValTok{3}\NormalTok{])}
+\NormalTok{Vtabla4}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Vtabla3, cum\_porcentaje)}
+\NormalTok{Vtabla4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Vote_ Freq porcentaje cum_frequencia cum_porcentaje
+## 1     A  187 0.06925926            187     0.06925926
+## 2     N  889 0.32925926           1076     0.39851852
+## 3    NA  168 0.06222222           1244     0.46074074
+## 4     U  588 0.21777778           1832     0.67851852
+## 5     Y  868 0.32148148           2700     1.00000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BPvote }\OtherTok{\textless{}{-}} \FunctionTok{barplot}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(Chile}\SpecialCharTok{$}\NormalTok{vote)),}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"orange"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"purple"}\NormalTok{),}\AttributeTok{legend.text=}\FunctionTok{c}\NormalTok{(}\StringTok{"will abstain"}\NormalTok{,}\StringTok{"will vote no"}\NormalTok{,}\StringTok{"not answered"}\NormalTok{,}\StringTok{"undecided"}\NormalTok{,}\StringTok{"will vote yes"}\NormalTok{),}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.8}\NormalTok{),}\AttributeTok{xlim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{7}\NormalTok{),}\AttributeTok{main=}\StringTok{"Frecuencias relativas de participación en votaciones intención de voto por Pinochet"}\NormalTok{,}\AttributeTok{ylab =}\StringTok{"Frecuencias Relativas"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+Respecto a la variable \textbf{\emph{Vote}} que es cualitativa nominal y
+está relacionada con la intención de voto por el presidente
+``Pinochet'', se encuentra que las personas que votaron en SI (33\%) son
+muy cercanas a las personas que votaron en NO (32\%)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Desagregando esta base de datos, solo para hogares del Norte y del
+  Sur, proporcione un análisis bivariado (tabulación cruzada y un
+  diagrama de barras comparativas) de las variables Educación y Voto.
+\end{enumerate}
+
+\hypertarget{anuxe1lisis-bivariado-educaciuxf3n-y-voto}{%
+\section{Análisis Bivariado Educación y
+voto}\label{anuxe1lisis-bivariado-educaciuxf3n-y-voto}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:timeSeries':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sel}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{,}\StringTok{"S"}\NormalTok{)}
+\NormalTok{Chile\_NteySur }\OtherTok{\textless{}{-}}\NormalTok{ Chile }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(region }\SpecialCharTok{\%in\%}\NormalTok{ sel)}
+\FunctionTok{library}\NormalTok{(gmodels)}
+\FunctionTok{CrossTable}\NormalTok{(Chile\_NteySur}\SpecialCharTok{$}\NormalTok{education,Chile\_NteySur}\SpecialCharTok{$}\NormalTok{vote)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## | Chi-square contribution |
+## |           N / Row Total |
+## |           N / Col Total |
+## |         N / Table Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  1040 
+## 
+##  
+##                         | Chile_NteySur$vote 
+## Chile_NteySur$education |         A |         N |        NA |         U |         Y | Row Total | 
+## ------------------------|-----------|-----------|-----------|-----------|-----------|-----------|
+##                      NA |         0 |         1 |         0 |         0 |         1 |         2 | 
+##                         |     0.138 |     0.253 |     0.092 |     0.373 |     0.057 |           | 
+##                         |     0.000 |     0.500 |     0.000 |     0.000 |     0.500 |     0.002 | 
+##                         |     0.000 |     0.003 |     0.000 |     0.000 |     0.002 |           | 
+##                         |     0.000 |     0.001 |     0.000 |     0.000 |     0.001 |           | 
+## ------------------------|-----------|-----------|-----------|-----------|-----------|-----------|
+##                       P |        23 |        99 |        23 |       107 |       227 |       479 | 
+##                         |     3.114 |    14.884 |     0.036 |     3.486 |     7.713 |           | 
+##                         |     0.048 |     0.207 |     0.048 |     0.223 |     0.474 |     0.461 | 
+##                         |     0.319 |     0.313 |     0.479 |     0.552 |     0.554 |           | 
+##                         |     0.022 |     0.095 |     0.022 |     0.103 |     0.218 |           | 
+## ------------------------|-----------|-----------|-----------|-----------|-----------|-----------|
+##                      PS |        14 |        80 |         8 |        20 |        51 |       173 | 
+##                         |     0.342 |    14.319 |     0.000 |     4.666 |     4.339 |           | 
+##                         |     0.081 |     0.462 |     0.046 |     0.116 |     0.295 |     0.166 | 
+##                         |     0.194 |     0.253 |     0.167 |     0.103 |     0.124 |           | 
+##                         |     0.013 |     0.077 |     0.008 |     0.019 |     0.049 |           | 
+## ------------------------|-----------|-----------|-----------|-----------|-----------|-----------|
+##                       S |        35 |       136 |        17 |        67 |       131 |       386 | 
+##                         |     2.564 |     2.986 |     0.037 |     0.348 |     2.946 |           | 
+##                         |     0.091 |     0.352 |     0.044 |     0.174 |     0.339 |     0.371 | 
+##                         |     0.486 |     0.430 |     0.354 |     0.345 |     0.320 |           | 
+##                         |     0.034 |     0.131 |     0.016 |     0.064 |     0.126 |           | 
+## ------------------------|-----------|-----------|-----------|-----------|-----------|-----------|
+##            Column Total |        72 |       316 |        48 |       194 |       410 |      1040 | 
+##                         |     0.069 |     0.304 |     0.046 |     0.187 |     0.394 |           | 
+## ------------------------|-----------|-----------|-----------|-----------|-----------|-----------|
+## 
+## 
+\end{verbatim}
+
+\textbf{Conclusiones}
+
+De acuerdo con el resultado de la anterior tabla de contingencia,
+encontramos que el mayor valor \textbf{\emph{Chi Cuadrado}} se ubica
+entre un nivel de estudio de primaria (P) y la intención de votar en
+\textbf{NO} por Pinochet como presidente. De otra parte, se evidencia
+que dicha relación entre la intención de votar en \textbf{NO} por
+Pinochet como presidente es alta en personas con un nivel educativo de
+PostSecundaria (PS).
+
+En otro de los cruces de variable en donde encontramos un
+\textbf{\emph{Chi Cuadrado}} superior es en la intención de voto de
+respaldar a Pinochet con el SI en personas con un nivel educativo de
+primaria (P)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{actividad-2}{%
+\section{Actividad \# 2}\label{actividad-2}}
+
+Una muestra de 226 personas mayores que viven en Burdeos (Gironde,
+suroeste de Francia) fueron entrevistados en 2000 para un estudio
+nutricional (base de datos: nutrition\_elderly ). La siguiente tabla
+presenta la descripción de las variables de estudio.
+
+Proporcione un resumen estadístico descriptivo completo de dos variables
+cualitativas y dos cuantitativas, solo con aquellas personas mayores de
+79 de género femenino.
+
+En cada uno de los casos, proporcione los análisis, conclusiones y
+recomendaciones analíticas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readxl)}
+\NormalTok{Nutrition }\OtherTok{\textless{}{-}} \FunctionTok{read\_excel}\NormalTok{(}\StringTok{"\textasciitilde{}/GitHub/estadistica/2. nutrition\_elderly.xlsx"}\NormalTok{, }
+    \AttributeTok{col\_types =} \FunctionTok{c}\NormalTok{(}\StringTok{"text"}\NormalTok{, }\StringTok{"text"}\NormalTok{, }\StringTok{"numeric"}\NormalTok{, }
+        \StringTok{"numeric"}\NormalTok{, }\StringTok{"numeric"}\NormalTok{, }\StringTok{"numeric"}\NormalTok{, }
+        \StringTok{"numeric"}\NormalTok{, }\StringTok{"text"}\NormalTok{, }\StringTok{"text"}\NormalTok{, }\StringTok{"text"}\NormalTok{, }
+        \StringTok{"text"}\NormalTok{, }\StringTok{"text"}\NormalTok{, }\StringTok{"text"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Selección de personas mayores de 79 de género femenino}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Nutrition\_2}\OtherTok{\textless{}{-}}\FunctionTok{subset}\NormalTok{(Nutrition,age}\SpecialCharTok{\textgreater{}}\DecValTok{79} \SpecialCharTok{\&}\NormalTok{ gender}\SpecialCharTok{==}\StringTok{"2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{resumen-estaduxedstico-descriptivo-variable-fat}{%
+\subsection{\texorpdfstring{Resumen estadístico descriptivo Variable
+\textbf{Fat}}{Resumen estadístico descriptivo Variable Fat}}\label{resumen-estaduxedstico-descriptivo-variable-fat}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Fat\_}\OtherTok{=}\NormalTok{ Nutrition\_2}\SpecialCharTok{$}\NormalTok{fat}
+\NormalTok{Fat\_tabla}\OtherTok{=}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{table}\NormalTok{(Fat\_))}
+\NormalTok{porcentaje}\OtherTok{=}\FunctionTok{prop.table}\NormalTok{(Fat\_tabla[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{Fat\_tabla2}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Fat\_tabla, porcentaje)}
+\NormalTok{cum\_frequencia}\OtherTok{=}\FunctionTok{cumsum}\NormalTok{(Fat\_tabla2[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{Fat\_tabla3}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Fat\_tabla2, cum\_frequencia)}
+\NormalTok{cum\_porcentaje}\OtherTok{=}\FunctionTok{cumsum}\NormalTok{(Fat\_tabla3[,}\DecValTok{3}\NormalTok{])}
+\NormalTok{Fat\_tabla4}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Fat\_tabla3, cum\_porcentaje)}
+\NormalTok{Fat\_tabla4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Fat_ Freq porcentaje cum_frequencia cum_porcentaje
+## 1    1    1 0.04347826              1     0.04347826
+## 2    2    3 0.13043478              4     0.17391304
+## 3    3    8 0.34782609             12     0.52173913
+## 4    4    5 0.21739130             17     0.73913043
+## 5    5    3 0.13043478             20     0.86956522
+## 6    6    3 0.13043478             23     1.00000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BPFat }\OtherTok{\textless{}{-}} \FunctionTok{barplot}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(Nutrition\_2}\SpecialCharTok{$}\NormalTok{fat)),}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"orange"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"purple"}\NormalTok{,}\StringTok{"yellow"}\NormalTok{,}\StringTok{"red"}\NormalTok{), }
+                 \AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.4}\NormalTok{),}\AttributeTok{main=}\StringTok{"Frecuencias relativas de fat"}\NormalTok{,}\AttributeTok{ylab =}\StringTok{"Relativas (\%)"}\NormalTok{, }\AttributeTok{legend.text =}  \FunctionTok{c}\NormalTok{(}\StringTok{"Butter"}\NormalTok{,}\StringTok{"Margarine"}\NormalTok{,}\StringTok{"Peanut Oil"}\NormalTok{,}\StringTok{"Sunflower Oil"}\NormalTok{,}\StringTok{"Olive Oil"}\NormalTok{,}\StringTok{"Mix of vegetables Oil"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+En relación con el resultado del análisi estadístico de la variable
+\textbf{\emph{Fat}} en personas mayores de 79 de género femenino que
+viven en la ciudad de Burdeos, se observa que en primer lugar es
+preferido el aceite de cacahuete con un 35\%, seguidamente el aceite de
+girasol con un 22\% de preferencia
+
+\hypertarget{resumen-estaduxedstico-descriptivo-variable-status}{%
+\subsection{\texorpdfstring{Resumen estadístico descriptivo Variable
+\textbf{Status}}{Resumen estadístico descriptivo Variable Status}}\label{resumen-estaduxedstico-descriptivo-variable-status}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Status\_}\OtherTok{=}\NormalTok{ Nutrition\_2}\SpecialCharTok{$}\NormalTok{status}
+\NormalTok{Status\_tabla}\OtherTok{=}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{table}\NormalTok{(Status\_))}
+\NormalTok{porcentaje}\OtherTok{=}\FunctionTok{prop.table}\NormalTok{(Status\_tabla[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{Status\_tabla2}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Status\_tabla, porcentaje)}
+\NormalTok{cum\_frequencia}\OtherTok{=}\FunctionTok{cumsum}\NormalTok{(Status\_tabla2[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{Status\_tabla3}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Status\_tabla2, cum\_frequencia)}
+\NormalTok{cum\_porcentaje}\OtherTok{=}\FunctionTok{cumsum}\NormalTok{(Status\_tabla3[,}\DecValTok{3}\NormalTok{])}
+\NormalTok{Status\_tabla4}\OtherTok{=} \FunctionTok{cbind}\NormalTok{(Status\_tabla3, cum\_porcentaje)}
+\NormalTok{Status\_tabla4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Status_ Freq porcentaje cum_frequencia cum_porcentaje
+## 1       1   20 0.86956522             20      0.8695652
+## 2       2    2 0.08695652             22      0.9565217
+## 3       3    1 0.04347826             23      1.0000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BPStatus }\OtherTok{\textless{}{-}} \FunctionTok{barplot}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(Nutrition\_2}\SpecialCharTok{$}\NormalTok{status)),}\AttributeTok{col=}\FunctionTok{c}\NormalTok{(}\StringTok{"orange"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{), }\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{),}\AttributeTok{main=}\StringTok{"Frecuencias relativas de status"}\NormalTok{,}\AttributeTok{ylab =}\StringTok{"Relativas (\%)"}\NormalTok{,}\AttributeTok{legend.text =} \FunctionTok{c}\NormalTok{(}\StringTok{"Single"}\NormalTok{,}\StringTok{"Living With Spouse"}\NormalTok{,}\StringTok{"Living With Family"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+En relación con el resultado del análisi estadístico de la variable
+\textbf{\emph{Status}} en personas mayores de 79 de género femenino que
+viven en la ciudad de Burdeos, se observa que el 85\% viven solas y el
+15\% restante conviven con la familia o con su esposo
+
+\textbf{Tabla de contingencia cruzada entre Fat y Status}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{CrossTable}\NormalTok{(Nutrition\_2}\SpecialCharTok{$}\NormalTok{fat,Nutrition\_2}\SpecialCharTok{$}\NormalTok{status)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## | Chi-square contribution |
+## |           N / Row Total |
+## |           N / Col Total |
+## |         N / Table Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  23 
+## 
+##  
+##                 | Nutrition_2$status 
+## Nutrition_2$fat |         1 |         2 |         3 | Row Total | 
+## ----------------|-----------|-----------|-----------|-----------|
+##               1 |         0 |         0 |         1 |         1 | 
+##                 |     0.870 |     0.087 |    21.043 |           | 
+##                 |     0.000 |     0.000 |     1.000 |     0.043 | 
+##                 |     0.000 |     0.000 |     1.000 |           | 
+##                 |     0.000 |     0.000 |     0.043 |           | 
+## ----------------|-----------|-----------|-----------|-----------|
+##               2 |         3 |         0 |         0 |         3 | 
+##                 |     0.059 |     0.261 |     0.130 |           | 
+##                 |     1.000 |     0.000 |     0.000 |     0.130 | 
+##                 |     0.150 |     0.000 |     0.000 |           | 
+##                 |     0.130 |     0.000 |     0.000 |           | 
+## ----------------|-----------|-----------|-----------|-----------|
+##               3 |         8 |         0 |         0 |         8 | 
+##                 |     0.157 |     0.696 |     0.348 |           | 
+##                 |     1.000 |     0.000 |     0.000 |     0.348 | 
+##                 |     0.400 |     0.000 |     0.000 |           | 
+##                 |     0.348 |     0.000 |     0.000 |           | 
+## ----------------|-----------|-----------|-----------|-----------|
+##               4 |         3 |         2 |         0 |         5 | 
+##                 |     0.418 |     5.635 |     0.217 |           | 
+##                 |     0.600 |     0.400 |     0.000 |     0.217 | 
+##                 |     0.150 |     1.000 |     0.000 |           | 
+##                 |     0.130 |     0.087 |     0.000 |           | 
+## ----------------|-----------|-----------|-----------|-----------|
+##               5 |         3 |         0 |         0 |         3 | 
+##                 |     0.059 |     0.261 |     0.130 |           | 
+##                 |     1.000 |     0.000 |     0.000 |     0.130 | 
+##                 |     0.150 |     0.000 |     0.000 |           | 
+##                 |     0.130 |     0.000 |     0.000 |           | 
+## ----------------|-----------|-----------|-----------|-----------|
+##               6 |         3 |         0 |         0 |         3 | 
+##                 |     0.059 |     0.261 |     0.130 |           | 
+##                 |     1.000 |     0.000 |     0.000 |     0.130 | 
+##                 |     0.150 |     0.000 |     0.000 |           | 
+##                 |     0.130 |     0.000 |     0.000 |           | 
+## ----------------|-----------|-----------|-----------|-----------|
+##    Column Total |        20 |         2 |         1 |        23 | 
+##                 |     0.870 |     0.087 |     0.043 |           | 
+## ----------------|-----------|-----------|-----------|-----------|
+## 
+## 
+\end{verbatim}
+
+\hypertarget{resumen-estaduxedstico-descriptivo-variable-height}{%
+\subsection{\texorpdfstring{Resumen estadístico descriptivo Variable
+\textbf{height}}{Resumen estadístico descriptivo Variable height}}\label{resumen-estaduxedstico-descriptivo-variable-height}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(fBasics)}
+\FunctionTok{basicStats}\NormalTok{(Nutrition\_2}\SpecialCharTok{$}\NormalTok{height)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             X..Nutrition_2.height
+## nobs                    23.000000
+## NAs                      0.000000
+## Minimum                140.000000
+## Maximum                175.000000
+## 1. Quartile            154.500000
+## 3. Quartile            161.500000
+## Mean                   158.695652
+## Median                 159.000000
+## Sum                   3650.000000
+## SE Mean                  1.530242
+## LCL Mean               155.522125
+## UCL Mean               161.869179
+## Variance                53.857708
+## Stdev                    7.338781
+## Skewness                -0.131839
+## Kurtosis                 0.540451
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(agricolae)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{),}\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{),}\AttributeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{h1}\OtherTok{\textless{}{-}}\FunctionTok{graph.freq}\NormalTok{(Nutrition\_2}\SpecialCharTok{$}\NormalTok{height, }\AttributeTok{density=}\DecValTok{6}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{3}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"height"}\NormalTok{,}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.1}\NormalTok{))}
+\NormalTok{h2}\OtherTok{\textless{}{-}}\FunctionTok{graph.freq}\NormalTok{(Nutrition\_2}\SpecialCharTok{$}\NormalTok{height, }\AttributeTok{border=}\DecValTok{0}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{3}\NormalTok{,}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.1}\NormalTok{),}\AttributeTok{xlab=}\StringTok{"height"}\NormalTok{)}
+\FunctionTok{polygon.freq}\NormalTok{(h2,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+\hypertarget{resumen-estaduxedstico-descriptivo-variable-weight}{%
+\subsection{\texorpdfstring{Resumen estadístico descriptivo Variable
+\textbf{Weight}}{Resumen estadístico descriptivo Variable Weight}}\label{resumen-estaduxedstico-descriptivo-variable-weight}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(fBasics)}
+\FunctionTok{basicStats}\NormalTok{(Nutrition\_2}\SpecialCharTok{$}\NormalTok{weight)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             X..Nutrition_2.weight
+## nobs                    23.000000
+## NAs                      0.000000
+## Minimum                 45.000000
+## Maximum                 80.000000
+## 1. Quartile             60.000000
+## 3. Quartile             67.500000
+## Mean                    63.826087
+## Median                  64.000000
+## Sum                   1468.000000
+## SE Mean                  1.786701
+## LCL Mean                60.120696
+## UCL Mean                67.531478
+## Variance                73.422925
+## Stdev                    8.568718
+## Skewness                -0.144788
+## Kurtosis                -0.427002
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{),}\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{),}\AttributeTok{cex=}\FloatTok{0.6}\NormalTok{)}
+\NormalTok{h1}\OtherTok{\textless{}{-}}\FunctionTok{graph.freq}\NormalTok{(Nutrition\_2}\SpecialCharTok{$}\NormalTok{weight, }\AttributeTok{density=}\DecValTok{6}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{3}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"weight"}\NormalTok{,}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.1}\NormalTok{))}
+\NormalTok{h2}\OtherTok{\textless{}{-}}\FunctionTok{graph.freq}\NormalTok{(Nutrition\_2}\SpecialCharTok{$}\NormalTok{weight, }\AttributeTok{border=}\DecValTok{0}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{3}\NormalTok{,}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.1}\NormalTok{),}\AttributeTok{xlab=}\StringTok{"weight"}\NormalTok{)}
+\FunctionTok{polygon.freq}\NormalTok{(h2,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{frequency=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+\textbf{Coeficiente de Correlación de Pearson entre las variables
+cuantitativas height y weight:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(MASS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'MASS'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     select
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+
+\CommentTok{\# Gráfico Simple (X,Y)}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Nutrition\_2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ height, }\AttributeTok{y =}\NormalTok{ weight)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{colour =} \StringTok{"red4"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Diagrama de dispersión altura y peso"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-24-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Midiendo el nivel de correlación:}
+\CommentTok{\#cor(x = log10(Nutrition\_2$height), y = Nutrition\_2$weight)}
+\FunctionTok{cor}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Nutrition\_2}\SpecialCharTok{$}\NormalTok{height, }\AttributeTok{y =}\NormalTok{ Nutrition\_2}\SpecialCharTok{$}\NormalTok{weight)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3511394
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Midiendo el nivel de correlación:}
+\CommentTok{\#cor(x = log10(Nutrition\_2$height), y = Nutrition\_2$weight)}
+\FunctionTok{cor}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Nutrition\_2}\SpecialCharTok{$}\NormalTok{height, }\AttributeTok{y =}\NormalTok{ Nutrition\_2}\SpecialCharTok{$}\NormalTok{weight, }\AttributeTok{method =} \StringTok{"pearson"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3511394
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Coeficiente de Correlación de Pearson:}
+
+
+\CommentTok{\# Gráfico Simple (X,Y)}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ Nutrition\_2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ tea, }\AttributeTok{y =}\NormalTok{ coffee)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{colour =} \StringTok{"red4"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Diagrama de dispersión altura y peso"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Taller_1_vfinal_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+\end{document}
