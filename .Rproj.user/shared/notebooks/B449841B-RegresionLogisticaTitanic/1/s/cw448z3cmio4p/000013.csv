@@ -1,0 +1,3 @@
+"0","dfset %>% "
+"0","  mutate(predicciones=y_pred)%>%"
+"0","  select(predicciones, everything())"

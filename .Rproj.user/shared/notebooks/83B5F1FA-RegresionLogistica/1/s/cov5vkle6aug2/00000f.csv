@@ -1,0 +1,2 @@
+"0","data[-t.id,""pred_50""]<-ifelse(data[-t.id,""prob_exito""]>=0.5,1,0)"
+"0","head(data,20)"

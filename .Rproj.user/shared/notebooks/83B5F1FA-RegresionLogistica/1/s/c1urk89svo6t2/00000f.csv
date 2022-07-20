@@ -1,0 +1,5 @@
+"0","library(readr)"
+"0","data <- read_csv(""https://raw.githubusercontent.com/statology/python-guides/main/default.csv"", "
+"0","    col_types = cols(default = col_integer(), "
+"0","        student = col_integer()))"
+"0","#View(default)"

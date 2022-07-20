@@ -1,0 +1,43 @@
+---
+title: "RegresionLogisticaTitanic"
+author: "Sergio Castañeda,Alexander Guecha"
+date: '2022-06-20'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readr)
+df <- read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/titanic.csv")
+df
+```
+
+```{r}
+library(dplyr)
+
+df %>% 
+  select(survived,sex,age)->dfset
+dfset
+
+```
+
+```{r}
+model<-glm(survived ~ sex+age, data=dfset, family = "binomial")
+summary(model)
+```
+
+```{r}
+y_pred<-predict(model, newdata = dfset,type = "response" )
+y_pred<-ifelse(y_pred>0.5, yes=1, no=0)
+```
+
+```{r}
+dfset %>% 
+  mutate(predicciones=y_pred)%>%
+  select(predicciones, everything())
+```
+
+

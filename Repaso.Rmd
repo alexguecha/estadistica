@@ -1,0 +1,41 @@
+---
+title: "Repaso"
+author: "Alexander Guecha"
+date: '2022-07-04'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Medidas de Forma
+Sesgo
+
+```{r}
+# Para Calcular el Sesgo:
+library(e1071)
+x <- c(126, 52, 133, 104, 115, 67, 57, 83, 53,105)
+skewness(x)
+hist(x)
+```
+
+```{r}
+peso<-c( 68, 53, 69.5, 55, 71, 63, 76.5, 65.5, 69, 75, 76, 57, 70.5, 71.5,56, 81.5,69, 59,67.5, 61,68, 59.5, 56.5,73, 61,72.5, 71.5, 59.5, 74.5, 63)
+
+min(peso,na.rm=FALSE)
+max(peso,na.rm=FALSE)
+mean(peso,na.rm=FALSE)
+median(peso,na.rm=FALSE)
+mode(peso)
+
+var(x,na.rm=FALSE)
+var(peso,na.rm=TRUE)
+sd(x,na.rm=FALSE)
+sd(peso,na.rm=TRUE)
+IQR(x,na.rm=FALSE)
+IQR(peso,na.rm=TRUE)
+skewness(peso)
+kurtosis(peso)
+```
+

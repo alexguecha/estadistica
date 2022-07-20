@@ -1,0 +1,77 @@
+---
+title: "RegresionLogistica"
+author: "Alexander Guecha"
+date: '2022-06-18'
+output: pdf_document
+---
+```{r}
+library(readr)
+data <- read_csv("https://raw.githubusercontent.com/statology/python-guides/main/default.csv", 
+    col_types = cols(default = col_integer(), 
+        student = col_integer()))
+#View(default)
+```
+
+```{r}
+head(data,15)
+```
+
+```{r}
+class(data)
+```
+
+```{r}
+data=as.data.frame(data)
+class(data)
+```
+
+```{r}
+str(data)
+
+```
+
+```{r}
+data$default=as.factor(data$default)
+data$student=as.factor(data$student)
+str(data)
+```
+
+```{r}
+library(caret)
+```
+
+```{r}
+set.seed(2021)
+t.id<-createDataPartition(data$default, p=0.7, list=F)
+head(t.id)
+```
+
+```{r}
+mod<- glm(default~ ., data=data[t.id,],family = "binomial")
+summary(mod)
+```
+
+```{r}
+pred1=predict(mod,newdata = data[t.id,],type="response")
+head(pred1)
+```
+
+```{r}
+pred2=predict(mod,newdata = data[-t.id,],type="response")
+head(pred2)
+```
+
+```{r}
+data[-t.id,"prob_exito"]<-predict(mod,newdata = data[-t.id,],type="response")
+head(data)
+```
+
+```{r}
+data[-t.id,"pred_50"]<-ifelse(data[-t.id,"prob_exito"]>=0.5,1,0)
+head(data,50)
+```
+
+```{r}
+table(data[-t.id,"default"],data[-t.id,"pred_50"],dnn=c("Actual","Predichos"))
+```
+

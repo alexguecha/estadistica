@@ -1,0 +1,17 @@
+---
+title: "RegresioLineal"
+author: "Alexander Guecha"
+date: '2022-06-27'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+names(Airpoll)
+regresion<-lm(Popden~ Nonwhite+NOX+SO2+Mortality, data = Airpoll)
+summary(regresion)
+```
+
